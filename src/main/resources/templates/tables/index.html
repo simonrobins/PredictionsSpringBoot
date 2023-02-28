@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout('tables', ~{::table})}">
+
+<head th:replace="~{layout :: head}" />
+
+<body id="tables">
+    <header th:replace="~{layout :: header}">This is a header</header>
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>Team</th>
+                <th>Played</th>
+                <th>Won</th>
+                <th>Drawn</th>
+                <th>Lost</th>
+                <th>Goals For</th>
+                <th>Goals Against</th>
+                <th>Goal Difference</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr th:each="result : ${results}">
+                    <td th:text="${result.team.name}"></td>
+                    <td th:text="${result.played}"></td>
+                    <td th:text="${result.won}"></td>
+                    <td th:text="${result.drawn}"></td>
+                    <td th:text="${result.lost}"></td>
+                    <td th:text="${result.goalsFor}"></td>
+                    <td th:text="${result.goalsAgainst}"></td>
+                    <td th:text="${result.goalDifference}"></td>
+                    <td th:text="${result.points}"></td>
+                </tr>
+        </tbody>
+    </table>
+    <footer th:replace="~{layout :: footer}">This is a footer</footer>
+</body>
+
+</html>
