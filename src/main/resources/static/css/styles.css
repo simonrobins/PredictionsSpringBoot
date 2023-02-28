@@ -1,0 +1,62 @@
+header {
+    padding: 0 !important;
+}
+
+nav {
+    text-align: center;
+    color: white;
+    background-color: #6c7ae0;
+    justify-content: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    padding: 1em;
+}
+
+table {
+    width: 95%;
+    margin: 0 auto;
+}
+
+table thead tr th {
+    color: white;
+    background-color: #6c7ae0;
+}
+
+footer {
+    text-align: center;
+}
+
+nav ul li a {
+    color: white;
+}
+
+nav ul li a:hover {
+    color: darkgray;
+}
+
+#home #homeNav,
+#users #usersNav,
+#teams #teamsNav,
+#tables #tablesNav,
+#fixtures #fixturesNav,
+#predictions #predictionsNav
+{
+    color: black;
+}
+
+.table-striped tr:nth-child(even) th,
+.table-striped tr:nth-child(even) td {
+    background: #f8f6ff;
+}
+
+select, form, input[type=date] {
+    margin-bottom: 0;
+}

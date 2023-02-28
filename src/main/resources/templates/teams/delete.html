@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout('teams', ~{::form})}">
+
+<head th:replace="~{layout :: head}" />
+
+<body id="teams">
+    <div th:replace="~{layout :: header}">This is a header</div>
+    <form method="POST" th:attr="action=@{/teams/update}">
+        <input type="hidden" name="id" th:attr="value=${team.id}"/>
+        <input type="hidden" name="action" th:attr="value=${action}"/>
+        <table class="table table-striped text-center" style="width: 50%; margin: 0 auto;">
+            <tr>
+                <th>Name</th>
+                <td th:text="${team.name}">AA</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Delete" /></td>
+                <td><a href="/teams">Cancel</a></td>
+            </tr>
+        </table>
+    </form>
+    <div th:replace="~{layout :: footer}">This is a footer</div>
+</body>
+
+</html>

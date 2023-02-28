@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout('teams', ~{::table})}">
+
+<head th:replace="~{layout :: head}" />
+
+<body id="teams">
+    <header th:replace="~{layout :: header}">This is a header</header>
+    <table class="table table-striped text-center">
+        <thead>
+            <tr>
+                <th>Team Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="team : ${teams}">
+                <td th:text="${team.name}">AA</td>
+                <td><a th:href="@{/teams/edit/{teamId}(teamId=${team.id})}">edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <footer th:replace="~{layout :: footer}">This is a footer</footer>
+</body>
+
+</html>

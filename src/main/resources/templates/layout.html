@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" th:fragment="layout(id, content)" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Predictions</title>
+    <link rel="stylesheet" href="/css/pico.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        function updatePrediction(form) {
+            var url = form.action + "/" + form.id.value + "/" + form.result.value;
+            update();
+        }
+        // /api/fixture/result/1/HOME
+        function updateFixture(form) {
+            var url = form.action + "/result/" + form.id.value + "/" + form.result.value;
+            update();
+        }
+        // /api/fixture/date/1/27/02/2023
+        function updateFixtureDate(date, fixtureId) {
+            var url = date.form.action + "/date/" + fixtureId + "/" + date.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+        function update(form) {
+            var url = form.action + "/" + form.id.value + "/" + form.result.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+    </script>
+</head>
+
+<body th:attr="id=${id}">
+    <!-- Main Navigation -->
+    <header>
+        <nav th:fragment="header">
+            <ul>
+                <li><a id="homeNav" href="/">Home</a></li>
+                <li><a id="usersNav" href="/users">Users</a></li>
+                <li><a id="teamsNav" href="/teams">Teams</a></li>
+                <li><a id="tablesNav" href="/tables">Tables</a></li>
+                <li><a id="fixturesNav" href="/fixtures">Fixtures</a></li>
+                <li><a id="predictionsNav" href="/predictions">Predictions</a></li>
+            </ul>
+        </nav>
+        <div>&nbsp;</div>
+    </header>
+
+    <div th:replace="${content}"></div>
+
+    <!-- Footer -->
+    <footer th:fragment="footer">&copy; 2023 Simon Robins &lt;simonrobins@mac.com&gt;</simonrobins>
+    </footer>
+
+</body>
+
+</html>
