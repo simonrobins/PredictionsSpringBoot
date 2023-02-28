@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout('predictions', ~{::section})}">
+
+<head th:replace="~{layout :: head}" />
+
+<body id="predictions">
+    <script th:inline="javascript">
+        function send() {
+            0;
+        }
+    </script>
+
+    <div th:replace="~{layout :: header}">This is a header</div>
+    <section>
+        <form method="GET" action="/predictions">
+            <table class="table text-center">
+                <tr>
+                    <td>
+                        <select name="userId">
+                            <option th:each="user : ${users}" th:value="${user.id}"
+                                th:text="${user.firstName + ' ' + user.lastName}" th:selected="${user.id == userId}">
+                                Tony
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" value="Select a user's predictions">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Home</th>
+                    <th>Away</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="prediction : ${predictions}">
+                    <td th:text="${#dates.format(prediction.fixture.date, 'dd MMM yyyy')}">26 Feb 2023</td>
+                    <td th:text="${prediction.fixture.home.name}">Arsenal</td>
+                    <td th:text="${prediction.fixture.away.name}">Chelsea</td>
+                    <td>
+                        <form method="GET" action="/api/prediction">
+                            <input type="hidden" name="id" th:value="${prediction.id}" />
+                            <select name="result" onchange="update(this.form)"
+                                th:disabled="${today.after(prediction.fixture.date)}">
+                                <option th:each="result : ${results}" th:value="${result}" th:text="${result.name}"
+                                    th:selected="${prediction.result == result}">Home</option>
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <div th:replace="~{layout :: footer}">This is a footer</div>
+</body>
+
+</html>

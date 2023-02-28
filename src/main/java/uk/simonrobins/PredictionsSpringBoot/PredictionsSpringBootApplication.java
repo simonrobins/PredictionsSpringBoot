@@ -28,6 +28,7 @@ public class PredictionsSpringBootApplication implements CommandLineRunner {
 		{
 			setupDatabase.setupTeamsAndFixtures("epl-2022-UTC.csv");
 			setupDatabase.setupUsers("users.csv");
+			setupDatabase.setupPredictions();
 		}
 	}
 }
