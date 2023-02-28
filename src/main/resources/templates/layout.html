@@ -7,24 +7,23 @@
     <link rel="stylesheet" href="/css/pico.css">
     <link rel="stylesheet" href="/css/styles.css">
     <script>
-        function updatePrediction(form) {
-            var url = form.action + "/" + form.id.value + "/" + form.result.value;
-            update();
-        }
-        // /api/fixture/result/1/HOME
-        function updateFixture(form) {
-            var url = form.action + "/result/" + form.id.value + "/" + form.result.value;
-            update();
-        }
-        // /api/fixture/date/1/27/02/2023
-        function updateFixtureDate(date, fixtureId) {
-            var url = date.form.action + "/date/" + fixtureId + "/" + date.value;
+        // /api/prediction/1/HOME
+        function updatePrediction(result, id) {
+            var url = result.form.action + "/result/" + id + "/" + result.value;
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", url, true);
             xhttp.send();
         }
-        function update(form) {
-            var url = form.action + "/" + form.id.value + "/" + form.result.value;
+        // /api/fixture/result/1/HOME
+        function updateFixtureResult(result, id) {
+            var url = result.form.action + "/result/" + id + "/" + result.value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url, true);
+            xhttp.send();
+        }
+        // /api/fixture/date/1/27/02/2023
+        function updateFixtureDate(date, id) {
+            var url = date.form.action + "/date/" + id + "/" + date.value;
             var xhttp = new XMLHttpRequest();
             xhttp.open("GET", url, true);
             xhttp.send();

@@ -39,21 +39,20 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="prediction : ${predictions}">
-                    <td th:text="${#dates.format(prediction.fixture.date, 'dd MMM yyyy')}">26 Feb 2023</td>
-                    <td th:text="${prediction.fixture.home.name}">Arsenal</td>
-                    <td th:text="${prediction.fixture.away.name}">Chelsea</td>
-                    <td>
-                        <form method="GET" action="/api/prediction">
-                            <input type="hidden" name="id" th:value="${prediction.id}" />
-                            <select name="result" onchange="update(this.form)"
+                <form method="GET" action="/api/prediction">
+                    <tr th:each="prediction : ${predictions}">
+                        <td th:text="${#dates.format(prediction.fixture.date, 'dd MMM yyyy')}">26 Feb 2023</td>
+                        <td th:text="${prediction.fixture.home.name}">Arsenal</td>
+                        <td th:text="${prediction.fixture.away.name}">Chelsea</td>
+                        <td>
+                            <select name="result" th:onchange="|updatePrediction(this, ${prediction.id})|"
                                 th:disabled="${today.after(prediction.fixture.date)}">
                                 <option th:each="result : ${results}" th:value="${result}" th:text="${result.name}"
                                     th:selected="${prediction.result == result}">Home</option>
                             </select>
-                        </form>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                </form>
             </tbody>
         </table>
     </section>

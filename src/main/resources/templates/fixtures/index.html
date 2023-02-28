@@ -27,7 +27,7 @@
                     <td th:text="${fixture.home.name}">Arsenal</td>
                     <td th:text="${fixture.away.name}">Chelsea</td>
                     <td>
-                        <select name="result" onchange="update(this.form)"
+                        <select name="result" th:onchange="|updateFixtureResult(this, ${fixture.id})|"
                             th:disabled="${yesterday.before(fixture.date)}">
                             <option th:each="result : ${results}" 
                                     th:value="${result}" 
