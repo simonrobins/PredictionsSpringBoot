@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout('users', ~{::form})}">
+
+<head th:replace="~{layout :: head}" />
+
+<body id="users">
+    <div th:replace="~{layout :: header}">This is a header</div>
+    <form method="POST" th:attr="action=@{/users/update}">
+        <input type="hidden" name="id" th:attr="value=${user.id}"/>
+        <input type="hidden" name="action" th:attr="value=${action}"/>
+        <table class="table table-striped text-center" style="width: 50%; margin: 0 auto;">
+            <thead><tr><th colspan="2">Edit User</th></tr></thead>
+            <tr>
+                <th>Initials</th>
+                <td><input type="text" name="initials" th:attr="value=${user.initials}"/></td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td><input type="text" name="firstName" th:attr="value=${user.firstName}"/></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input type="text" name="lastName" th:attr="value=${user.lastName}"/></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><input type="text" name="email" th:attr="value=${user.email}"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Update" /></td>
+                <td><a href="/users">Cancel</a></td>
+            </tr>
+        </table>
+    </form>
+    <div th:replace="~{layout :: footer}">This is a footer</div>
+</body>
+
+</html>

@@ -11,26 +11,36 @@ import org.springframework.stereotype.Component;
 import uk.simonrobins.PredictionsSpringBoot.entity.Fixture;
 import uk.simonrobins.PredictionsSpringBoot.entity.Result;
 import uk.simonrobins.PredictionsSpringBoot.entity.Team;
+import uk.simonrobins.PredictionsSpringBoot.entity.User;
 import uk.simonrobins.PredictionsSpringBoot.service.FixtureService;
 import uk.simonrobins.PredictionsSpringBoot.service.TeamService;
+import uk.simonrobins.PredictionsSpringBoot.service.UserService;
 
 @Component
 public class SetupDatabase {
-    private class ResultsHeader
-	{
-		static final int MatchNumber = 0;
-		static final int RoundNumber = 1;
-		static final int Date = 2;
-		static final int Location = 3;
-		static final int HomeTeam = 4;
-		static final int AwayTeam = 5;
-		static final int Result = 6;
-	}
 
+	static final int 
+			MatchNumberField = 0,
+			RoundNumberField = 1,
+			DateField = 2,
+			LocationField = 3,
+			HomeTeamField = 4,
+			AwayTeamField = 5,
+			ResultField = 6;
+
+	static final int
+		InitialsField = 0,
+		FirstNameField = 1,
+		LastNameField = 2,
+		EmailField = 3,
+		PasswordField = 4;
+	
+	@Autowired
+	private FixtureService fixtureService;
 	@Autowired
 	private TeamService teamService;
 	@Autowired
-	private FixtureService fixtureService;
+	private UserService userService;
 
     public void setupTeamsAndFixtures(String filename)
 	{
@@ -47,19 +57,19 @@ public class SetupDatabase {
 					{
 						// Match Number,Round Number,Date,Location,Home Team,Away Team,Result
 						String[] row = line.split(",");
-						int matchNumber = Integer.parseInt(row[ResultsHeader.MatchNumber]);
-						int roundNumber = Integer.parseInt(row[ResultsHeader.RoundNumber]);
-						Date date = format.parse(row[ResultsHeader.Date]);
-						String location = row[ResultsHeader.Location];
-						Team homeTeam = readOrCreateTeam(row[ResultsHeader.HomeTeam]);
-						Team awayTeam = readOrCreateTeam(row[ResultsHeader.AwayTeam]);
+						int matchNumber = Integer.parseInt(row[MatchNumberField]);
+						int roundNumber = Integer.parseInt(row[RoundNumberField]);
+						Date date = format.parse(row[DateField]);
+						String location = row[LocationField];
+						Team homeTeam = readOrCreateTeam(row[HomeTeamField]);
+						Team awayTeam = readOrCreateTeam(row[AwayTeamField]);
 						Integer homeGoals = null;
 						Integer awayGoals = null;
 						Result result = null;
 						// Do we have the scores at the end of the line?
-						if (row.length > ResultsHeader.Result)
+						if (row.length > ResultField)
 						{
-							String[] goals = row[ResultsHeader.Result].split(" - ");
+							String[] goals = row[ResultField].split(" - ");
 							homeGoals = Integer.parseInt(goals[0]);
 							awayGoals = Integer.parseInt(goals[1]);
 							if (homeGoals > awayGoals)
@@ -78,6 +88,34 @@ public class SetupDatabase {
 				{
 					System.out.println(ex);
 				}
+			});
+		}
+		catch (Exception ex)
+		{
+			System.out.println(ex);
+		}
+	}
+
+	public void setupUsers(String filename)
+	{
+		try (BufferedReader br = new BufferedReader(new FileReader(filename)))
+		{
+			br.lines().forEach(line ->
+			{
+				// Let's skip the header line if it exists
+				if (line.startsWith("Initials") == false)
+				{
+					// Initials, First Name, Last Name, Email, Password
+					String[] row = line.split(",");
+					User user = new User(
+						row[InitialsField], 
+						row[FirstNameField], 
+						row[LastNameField], 
+						row[EmailField], 
+						row[PasswordField]);
+					userService.create(user);
+				}
+
 			});
 		}
 		catch (Exception ex)
