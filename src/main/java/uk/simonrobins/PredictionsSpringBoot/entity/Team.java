@@ -18,7 +18,7 @@ public class Team
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
+	private String stadium;
 	@Column(nullable = false)
 	private String name;
 	@OneToMany(mappedBy="home")
@@ -43,6 +43,14 @@ public class Team
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+
+	public String getStadium() {
+		return stadium;
+	}
+
+	public void setStadium(String stadium) {
+		this.stadium = stadium;
 	}
 
 	public String getName()

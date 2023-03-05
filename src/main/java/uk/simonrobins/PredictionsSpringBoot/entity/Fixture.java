@@ -21,7 +21,6 @@ public class Fixture
 	private int matchNumber;
 	private int roundNumber;
 	private Date date;
-	private String location;
 
 	@ManyToOne
 	private Team home;
@@ -39,7 +38,6 @@ public class Fixture
 	public Fixture(int matchNumber, 
 		int roundNumber, 
 		Date date, 
-		String location, 
 		Team home, 
 		Team away, 
 		Integer homeGoals, 
@@ -49,7 +47,6 @@ public class Fixture
 		this.matchNumber = matchNumber;
 		this.roundNumber = roundNumber;
 		this.date = date;
-		this.location = location;
 		this.home = home;
 		this.away = away;
 		this.homeGoals = homeGoals;
@@ -97,16 +94,6 @@ public class Fixture
 		this.date = date;
 	}
 
-	public String getLocation()
-	{
-		return location;
-	}
-
-	public void setLocation(String location)
-	{
-		this.location = location;
-	}
-
 	public Team getHome()
 	{
 		return this.home;
@@ -127,22 +114,22 @@ public class Fixture
 		this.away = away;
 	}
 
-	public int getHomeGoals()
+	public Integer getHomeGoals()
 	{
 		return homeGoals;
 	}
 
-	public void setHomeGoals(int homeGoals)
+	public void setHomeGoals(Integer homeGoals)
 	{
 		this.homeGoals = homeGoals;
 	}
 
-	public int getAwayGoals()
+	public Integer getAwayGoals()
 	{
 		return awayGoals;
 	}
 
-	public void setAwayGoals(int awayGoals)
+	public void setAwayGoals(Integer awayGoals)
 	{
 		this.awayGoals = awayGoals;
 	}

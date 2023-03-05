@@ -25,7 +25,7 @@ public class SetupDatabase {
 	static final int MatchNumberField = 0,
 			RoundNumberField = 1,
 			DateField = 2,
-			LocationField = 3,
+			StadiumField = 3,
 			HomeTeamField = 4,
 			AwayTeamField = 5,
 			ResultField = 6;
@@ -58,8 +58,8 @@ public class SetupDatabase {
 						int matchNumber = Integer.parseInt(row[MatchNumberField]);
 						int roundNumber = Integer.parseInt(row[RoundNumberField]);
 						Date date = format.parse(row[DateField]);
-						String location = row[LocationField];
-						Team homeTeam = readOrCreateTeam(row[HomeTeamField]);
+						String stadium = row[StadiumField];
+						Team homeTeam = readOrCreateTeam(row[HomeTeamField], stadium);
 						Team awayTeam = readOrCreateTeam(row[AwayTeamField]);
 						Integer homeGoals = null;
 						Integer awayGoals = null;
@@ -77,7 +77,7 @@ public class SetupDatabase {
 								result = Result.DRAW;
 						}
 
-						Fixture fixture = new Fixture(matchNumber, roundNumber, date, location, homeTeam, awayTeam,
+						Fixture fixture = new Fixture(matchNumber, roundNumber, date, homeTeam, awayTeam,
 								homeGoals, awayGoals, result);
 						fixtureService.create(fixture);
 					}
@@ -133,11 +133,19 @@ public class SetupDatabase {
 	}
 
 	private Team readOrCreateTeam(String teamname) {
+		return readOrCreateTeam(teamname, null);
+	}
+
+	private Team readOrCreateTeam(String teamname, String stadium) {
 		Team team = teamService.findByName(teamname);
 		if (null == team) {
 			team = new Team(teamname);
-			teamService.create(team);
 		}
+
+		if (stadium != null)
+			team.setStadium(stadium);
+
+		teamService.create(team);
 
 		return team;
 	}
