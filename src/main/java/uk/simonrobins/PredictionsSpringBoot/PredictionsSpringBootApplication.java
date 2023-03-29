@@ -15,20 +15,15 @@ public class PredictionsSpringBootApplication implements CommandLineRunner {
 	@Autowired
 	SetupDatabase setupDatabase;
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		log.info(PredictionsSpringBootApplication.class.getName() + " starting up.");
 		SpringApplication.run(PredictionsSpringBootApplication.class, args);
 	}
 
 	@Override
-	public void run(String... args)
-	{
-		if(args.length > 0 && args[0].equals("demo"))
-		{
-			setupDatabase.setupTeamsAndFixtures("epl-2022-UTC.csv");
-			setupDatabase.setupUsers("users.csv");
-			setupDatabase.setupPredictions();
-		}
+	public void run(String... args) {
+		setupDatabase.setupTeamsAndFixtures("epl-2022-UTC.csv");
+		setupDatabase.setupUsers("users.csv");
+		setupDatabase.setupPredictions();
 	}
 }
