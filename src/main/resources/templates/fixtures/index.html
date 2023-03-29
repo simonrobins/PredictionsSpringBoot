@@ -6,34 +6,51 @@
 <body id="fixtures">
     <div th:replace="~{layout :: header}">This is a header</div>
     <table class="table table-striped text-center">
+        <form method="GET" action="/fixtures">
+            <tbody>
+                <tr>
+                    <td>Round Number:</td>
+                    <td>
+                        <select name="round" onchange="this.form.submit()">
+                            <option value="">All</option>
+                            <option th:each="rnd : ${rounds}" th:value="${rnd}" th:text="${rnd}"
+                                th:selected="${round == rnd}">0</option>
+                        </select>
+                    </td>
+                    <td>Team:</td>
+                    <td>
+                        <select name="teamId" onchange="this.form.submit()">
+                            <option value="">All</option>
+                            <option th:each="tm : ${teams}" th:value="${tm.id}" th:text="${tm.name}"
+                                th:selected="${teamId == tm.id}">0</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </form>
+    </table>
+    <table class="table table-striped text-center">
         <thead>
             <tr>
-                <th>Round</th>
                 <th>Date</th>
                 <th>Home Team</th>
                 <th>Away Team</th>
-                <th>Result</th>
+                <th>Home Goals</th>
+                <th>Away Goals</th>
             </tr>
         </thead>
         <tbody>
             <form method="GET" action="/api/fixture">
                 <tr th:each="fixture : ${fixtures}">
-                    <td th:text="${fixture.roundNumber}"></td>
-                    <td>
-                        <input type="date"
-                            th:onchange="|updateFixtureDate(this, ${fixture.id})|"
-                            th:value="${#dates.format(fixture.date, 'yyyy-MM-dd')}" />
+                    <td th:text="${#dates.format(fixture.date, 'yyyy-MM-dd')}">
                     </td>
                     <td th:text="${fixture.home.name}">Arsenal</td>
                     <td th:text="${fixture.away.name}">Chelsea</td>
                     <td>
-                        <select name="result" th:onchange="|updateFixtureResult(this, ${fixture.id})|"
-                            th:disabled="${yesterday.before(fixture.date)}">
-                            <option th:each="result : ${results}" 
-                                    th:value="${result}" 
-                                    th:text="${result.name}"
-                                    th:selected="${fixture.result == result}">Home</option>
-                        </select>
+                        <input type="text" id="homeGoals" name="homeGoals" th:value="${fixture.homeGoals}?: ''" />
+                    </td>
+                    <td>
+                        <input type="text" id="awayGoals" name="awayGoals" th:value="${fixture.awayGoals}?: ''" />
                     </td>
                 </tr>
             </form>
