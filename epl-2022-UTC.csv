@@ -62,9 +62,9 @@ Match Number,Round Number,Date,Location,Home Team,Away Team,Result
 64,7,12/01/2023 20:00,Craven Cottage,Fulham,Chelsea,2 - 1
 63,7,19/01/2023 07:00,Selhurst Park,Crystal Palace,Man Utd,1 - 1
 68,7,19/01/2023 20:00,Etihad Stadium,Man City,Spurs,4 - 2
-62,7,01/03/2023 19:45,Emirates Stadium,Arsenal,Everton,
-67,7,01/03/2023 20:00,Anfield,Liverpool,Wolves,
-69,7,15/03/2023 19:30,St. Mary's Stadium,Southampton,Brentford,
+62,7,01/03/2023 19:45,Emirates Stadium,Arsenal,Everton,4 - 0
+67,7,01/03/2023 20:00,Anfield,Liverpool,Wolves,2 - 0
+69,7,15/03/2023 19:30,St. Mary's Stadium,Southampton,Brentford,0 - 2
 61,7,04/04/2023 18:45,Vitality Stadium,Bournemouth,Brighton,
 65,7,04/04/2023 18:45,Elland Road,Leeds,Nottingham Forest,
 66,7,04/04/2023 18:45,King Power Stadium,Leicester,Aston Villa,
@@ -77,7 +77,7 @@ Match Number,Round Number,Date,Location,Home Team,Away Team,Result
 72,8,18/09/2022 11:00,Brentford Community Stadium,Brentford,Arsenal,0 - 3
 75,8,18/09/2022 13:15,Goodison Park,Everton,West Ham,1 - 0
 76,8,08/02/2023 20:00,Old Trafford,Man Utd,Leeds,2 - 2
-73,8,15/03/2023 19:30,Amex Stadium,Brighton,Crystal Palace,
+73,8,15/03/2023 19:30,Amex Stadium,Brighton,Crystal Palace,1 - 0
 74,8,04/04/2023 19:00,Stamford Bridge,Chelsea,Liverpool,
 82,9,01/10/2022 11:30,Emirates Stadium,Arsenal,Spurs,3 - 1
 81,9,01/10/2022 14:00,Vitality Stadium,Bournemouth,Brentford,0 - 0
@@ -249,34 +249,34 @@ Match Number,Round Number,Date,Location,Home Team,Away Team,Result
 242,25,25/02/2023 19:45,Selhurst Park,Crystal Palace,Liverpool,0 - 0
 249,25,26/02/2023 13:30,Tottenham Hotspur Stadium,Spurs,Chelsea,2 - 0
 247,25,05/04/2023 19:00,Old Trafford,Man Utd,Brentford,
-257,26,04/03/2023 12:30,Etihad Stadium,Man City,Newcastle,
-251,26,04/03/2023 15:00,Emirates Stadium,Arsenal,Bournemouth,
-252,26,04/03/2023 15:00,Villa Park,Aston Villa,Crystal Palace,
-254,26,04/03/2023 15:00,Amex Stadium,Brighton,West Ham,
-255,26,04/03/2023 15:00,Stamford Bridge,Chelsea,Leeds,
-260,26,04/03/2023 15:00,Molineux Stadium,Wolves,Spurs,
-259,26,04/03/2023 17:30,St. Mary's Stadium,Southampton,Leicester,
-258,26,05/03/2023 14:00,The City Ground,Nottingham Forest,Everton,
-256,26,05/03/2023 16:30,Anfield,Liverpool,Man Utd,
-253,26,06/03/2023 20:00,Brentford Community Stadium,Brentford,Fulham,
-261,27,11/03/2023 12:30,Vitality Stadium,Bournemouth,Liverpool,
-270,27,11/03/2023 14:00,London Stadium,West Ham,Aston Villa,
-263,27,11/03/2023 15:00,Goodison Park,Everton,Brentford,
-265,27,11/03/2023 15:00,Elland Road,Leeds,Brighton,
-266,27,11/03/2023 15:00,King Power Stadium,Leicester,Chelsea,
-267,27,11/03/2023 15:00,Old Trafford,Man Utd,Southampton,
-269,27,11/03/2023 15:00,Tottenham Hotspur Stadium,Spurs,Nottingham Forest,
-262,27,11/03/2023 17:30,Selhurst Park,Crystal Palace,Man City,
-264,27,12/03/2023 14:00,Craven Cottage,Fulham,Arsenal,
-268,27,12/03/2023 16:30,St. James' Park,Newcastle,Wolves,
-278,28,17/03/2023 20:00,The City Ground,Nottingham Forest,Newcastle,
-272,28,18/03/2023 15:00,Villa Park,Aston Villa,Bournemouth,
-273,28,18/03/2023 15:00,Brentford Community Stadium,Brentford,Leicester,
+257,26,04/03/2023 12:30,Etihad Stadium,Man City,Newcastle,2 - 0
+251,26,04/03/2023 15:00,Emirates Stadium,Arsenal,Bournemouth,3 - 2
+252,26,04/03/2023 15:00,Villa Park,Aston Villa,Crystal Palace,1 - 0
+254,26,04/03/2023 15:00,Amex Stadium,Brighton,West Ham,4 - 0
+255,26,04/03/2023 15:00,Stamford Bridge,Chelsea,Leeds,1 - 0
+260,26,04/03/2023 15:00,Molineux Stadium,Wolves,Spurs,1 - 0
+259,26,04/03/2023 17:30,St. Mary's Stadium,Southampton,Leicester,1 - 0
+258,26,05/03/2023 14:00,The City Ground,Nottingham Forest,Everton,2 - 2
+256,26,05/03/2023 16:30,Anfield,Liverpool,Man Utd,7 - 0
+253,26,06/03/2023 20:00,Brentford Community Stadium,Brentford,Fulham,3 - 2
+261,27,11/03/2023 12:30,Vitality Stadium,Bournemouth,Liverpool,1 - 0
+263,27,11/03/2023 15:00,Goodison Park,Everton,Brentford,1 - 0
+265,27,11/03/2023 15:00,Elland Road,Leeds,Brighton,2 - 2
+266,27,11/03/2023 15:00,King Power Stadium,Leicester,Chelsea,1 - 3
+269,27,11/03/2023 15:00,Tottenham Hotspur Stadium,Spurs,Nottingham Forest,3 - 1
+262,27,11/03/2023 17:30,Selhurst Park,Crystal Palace,Man City,0 - 1
+264,27,12/03/2023 14:00,Craven Cottage,Fulham,Arsenal,0 - 3
+267,27,12/03/2023 14:00,Old Trafford,Man Utd,Southampton,0 - 0
+270,27,12/03/2023 14:00,London Stadium,West Ham,Aston Villa,1 - 1
+268,27,12/03/2023 16:30,St. James' Park,Newcastle,Wolves,2 - 1
+278,28,17/03/2023 20:00,The City Ground,Nottingham Forest,Newcastle,1 - 2
+272,28,18/03/2023 15:00,Villa Park,Aston Villa,Bournemouth,3 - 0
+273,28,18/03/2023 15:00,Brentford Community Stadium,Brentford,Leicester,1 - 1
 276,28,18/03/2023 15:00,Anfield,Liverpool,Fulham,
-279,28,18/03/2023 15:00,St. Mary's Stadium,Southampton,Spurs,
-280,28,18/03/2023 15:00,Molineux Stadium,Wolves,Leeds,
-275,28,18/03/2023 17:30,Stamford Bridge,Chelsea,Everton,
-271,28,19/03/2023 14:00,Emirates Stadium,Arsenal,Crystal Palace,
+279,28,18/03/2023 15:00,St. Mary's Stadium,Southampton,Spurs,3 - 3
+280,28,18/03/2023 15:00,Molineux Stadium,Wolves,Leeds,2 - 4
+275,28,18/03/2023 17:30,Stamford Bridge,Chelsea,Everton,2 - 2
+271,28,19/03/2023 14:00,Emirates Stadium,Arsenal,Crystal Palace,4 - 1
 274,28,19/03/2023 14:00,Amex Stadium,Brighton,Man Utd,
 277,28,19/03/2023 16:30,Etihad Stadium,Man City,West Ham,
 287,29,01/04/2023 11:30,Etihad Stadium,Man City,Liverpool,
@@ -296,8 +296,8 @@ Match Number,Round Number,Date,Location,Home Team,Away Team,Result
 295,30,08/04/2023 14:00,King Power Stadium,Leicester,Bournemouth,
 299,30,08/04/2023 14:00,Tottenham Hotspur Stadium,Spurs,Brighton,
 300,30,08/04/2023 14:00,Molineux Stadium,Wolves,Chelsea,
-294,30,08/04/2023 16:30,Elland Road,Leeds,Crystal Palace,
-298,30,09/04/2023 13:00,St. Mary's Stadium,Southampton,Man City,
+298,30,08/04/2023 16:30,St. Mary's Stadium,Southampton,Man City,
+294,30,09/04/2023 13:00,Elland Road,Leeds,Crystal Palace,
 296,30,09/04/2023 15:30,Anfield,Liverpool,Arsenal,
 301,31,15/04/2023 11:30,Villa Park,Aston Villa,Newcastle,
 302,31,15/04/2023 14:00,Stamford Bridge,Chelsea,Brighton,
@@ -305,35 +305,35 @@ Match Number,Round Number,Date,Location,Home Team,Away Team,Result
 307,31,15/04/2023 14:00,St. Mary's Stadium,Southampton,Crystal Palace,
 308,31,15/04/2023 14:00,Tottenham Hotspur Stadium,Spurs,Bournemouth,
 310,31,15/04/2023 14:00,Molineux Stadium,Wolves,Brentford,
-306,31,15/04/2023 16:30,The City Ground,Nottingham Forest,Man Utd,
+305,31,15/04/2023 16:30,Etihad Stadium,Man City,Leicester,
 309,31,16/04/2023 13:00,London Stadium,West Ham,Arsenal,
-305,31,16/04/2023 15:30,Etihad Stadium,Man City,Leicester,
+306,31,16/04/2023 15:30,The City Ground,Nottingham Forest,Man Utd,
 304,31,17/04/2023 19:00,Elland Road,Leeds,Liverpool,
 312,32,21/04/2023 19:00,Emirates Stadium,Arsenal,Southampton,
 316,32,22/04/2023 11:30,Craven Cottage,Fulham,Leeds,
-311,32,22/04/2023 14:00,Vitality Stadium,Bournemouth,West Ham,
 313,32,22/04/2023 14:00,Brentford Community Stadium,Brentford,Aston Villa,
 315,32,22/04/2023 14:00,Selhurst Park,Crystal Palace,Everton,
 317,32,22/04/2023 14:00,King Power Stadium,Leicester,Wolves,
 318,32,22/04/2023 14:00,Anfield,Liverpool,Nottingham Forest,
 319,32,22/04/2023 16:30,Old Trafford,Man Utd,Chelsea,
+311,32,23/04/2023 13:00,Vitality Stadium,Bournemouth,West Ham,
 320,32,23/04/2023 13:00,St. James' Park,Newcastle,Spurs,
 314,32,23/04/2023 15:30,Amex Stadium,Brighton,Man City,
 326,33,25/04/2023 18:30,Molineux Stadium,Wolves,Crystal Palace,
 327,33,25/04/2023 18:45,Villa Park,Aston Villa,Fulham,
-329,33,25/04/2023 18:45,St. Mary's Stadium,Southampton,Bournemouth,
 322,33,25/04/2023 19:00,Elland Road,Leeds,Leicester,
 323,33,26/04/2023 18:30,The City Ground,Nottingham Forest,Brighton,
 325,33,26/04/2023 18:45,London Stadium,West Ham,Liverpool,
 328,33,26/04/2023 18:45,Stamford Bridge,Chelsea,Brentford,
 330,33,26/04/2023 19:00,Etihad Stadium,Man City,Arsenal,
 321,33,27/04/2023 18:45,Goodison Park,Everton,Newcastle,
+329,33,27/04/2023 18:45,St. Mary's Stadium,Southampton,Bournemouth,
 324,33,27/04/2023 19:15,Tottenham Hotspur Stadium,Spurs,Man Utd,
 335,34,29/04/2023 11:30,Selhurst Park,Crystal Palace,West Ham,
-331,34,29/04/2023 14:00,Vitality Stadium,Bournemouth,Leeds,
 333,34,29/04/2023 14:00,Brentford Community Stadium,Brentford,Nottingham Forest,
 334,34,29/04/2023 14:00,Amex Stadium,Brighton,Wolves,
 332,34,29/04/2023 16:30,Emirates Stadium,Arsenal,Chelsea,
+331,34,30/04/2023 13:00,Vitality Stadium,Bournemouth,Leeds,
 336,34,30/04/2023 13:00,Craven Cottage,Fulham,Man City,
 339,34,30/04/2023 13:00,Old Trafford,Man Utd,Aston Villa,
 340,34,30/04/2023 13:00,St. James' Park,Newcastle,Southampton,
