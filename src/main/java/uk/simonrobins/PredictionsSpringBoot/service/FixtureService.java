@@ -1,19 +1,19 @@
 package uk.simonrobins.PredictionsSpringBoot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import uk.simonrobins.PredictionsSpringBoot.entity.Fixture;
-import uk.simonrobins.PredictionsSpringBoot.entity.Result;
 import uk.simonrobins.PredictionsSpringBoot.entity.Team;
 import uk.simonrobins.PredictionsSpringBoot.entity.TeamData;
 import uk.simonrobins.PredictionsSpringBoot.repository.FixtureRepository;
 import uk.simonrobins.PredictionsSpringBoot.repository.TeamRepository;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FixtureService
@@ -23,9 +23,44 @@ public class FixtureService
     @Autowired
     private TeamRepository teamRepository;
 
-    public List<Fixture> findAll()
+    public Set<Fixture> findAll()
     {
-        return fixtureRepository.findAll(Sort.by("date"));
+        return fixtureRepository.findAll();
+    }
+
+    public Set<Fixture> findResults(Integer round, Long teamId)
+    {
+        return fixtureRepository.findResults(getDate(), round, teamId);
+    }
+
+    public Set<Fixture> findMissing(Integer round, Long teamId)
+    {
+        return fixtureRepository.findMissing(getDate(), round, teamId);
+    }
+
+    public Set<Fixture> findUpcoming(Integer round, Long teamId)
+    {
+        return fixtureRepository.findUpcoming(getDate(), round, teamId);
+    }
+
+    public Set<Integer> findMissingRounds()
+    {
+        return fixtureRepository.findMissingRounds(getDate());
+    }
+
+    public Set<Integer> findAllRounds()
+    {
+        return fixtureRepository.findAllRounds();
+    }
+
+    public Set<Integer> findUpcomingRounds()
+    {
+        return fixtureRepository.findUpcomingRounds(getDate());
+    }
+
+    public Set<Integer> findResultsRounds()
+    {
+        return fixtureRepository.findResultsRounds(getDate());
     }
 
     public List<TeamData> resultsTable()
@@ -46,17 +81,32 @@ public class FixtureService
         fixtureRepository.save(fixture);
     }
 
-    public void updateDate(Long id, Date date)
+    public Fixture updateDate(Long id, Date date)
     {
         Fixture fixture = fixtureRepository.findById(id).get();
         fixture.setDate(date);
-        fixtureRepository.save(fixture);
+        return fixtureRepository.save(fixture);
     }
 
-    public void updateResult(Long id, Result result)
+    public Fixture updateHomeGoals(Long id, Integer goals)
     {
         Fixture fixture = fixtureRepository.findById(id).get();
-        fixture.setResult(result);
-        fixtureRepository.save(fixture);
+        fixture.setHomeGoals(goals);
+        return fixtureRepository.save(fixture);
+    }
+
+    public Fixture updateAwayGoals(Long id, Integer goals)
+    {
+        Fixture fixture = fixtureRepository.findById(id).get();
+        fixture.setAwayGoals(goals);
+        return fixtureRepository.save(fixture);
+    }
+
+    private Date getDate()
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR_OF_DAY, -2);
+
+        return calendar.getTime();
     }
 }
