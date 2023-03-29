@@ -1,6 +1,6 @@
 package uk.simonrobins.PredictionsSpringBoot.repository;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 
 public interface TeamRepository extends CrudRepository<Team, Long>
 {
-    List<Team> findAll(Sort sort);
+    Set<Team> findAll(Sort sort);
 
     Team findByName(String name);
 }
