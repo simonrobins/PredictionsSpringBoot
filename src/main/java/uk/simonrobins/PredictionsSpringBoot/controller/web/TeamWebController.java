@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import uk.simonrobins.PredictionsSpringBoot.entity.Team;
 import uk.simonrobins.PredictionsSpringBoot.service.TeamService;
 
-import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/teams")
@@ -25,13 +25,13 @@ public class TeamWebController
     @GetMapping
     public String index(Model model)
     {
-        List<Team> teams = teamService.get();
+        Set<Team> teams = teamService.findAll();
         model.addAttribute("teams", teams);
         return "teams/index";
     }
 
     @GetMapping("create")
-    public String  create(Model model)
+    public String create(Model model)
     {
         Team team = new Team();
         model.addAttribute("action", "create");
@@ -39,11 +39,11 @@ public class TeamWebController
         return "teams/edit";
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("update/{id}")
     public String edit(@PathVariable("id") Long id, Model model)
     {
-        Team team = teamService.get(id);
-        model.addAttribute("action", "edit");
+        Team team = teamService.findById(id);
+        model.addAttribute("action", "update");
         model.addAttribute("team", team);
         return "teams/edit";
     }
@@ -51,7 +51,7 @@ public class TeamWebController
     @GetMapping("delete/{id}")
     public String delete(@PathVariable("id") Long id, Model model)
     {
-        Team team = teamService.get(id);
+        Team team = teamService.findById(id);
         model.addAttribute("action", "delete");
         model.addAttribute("team", team);
         return "teams/delete";
@@ -65,7 +65,7 @@ public class TeamWebController
         case "create":
             teamService.create(team);
             break;
-        case "edit":
+        case "update":
             teamService.update(team);
             break;
         case "delete":
