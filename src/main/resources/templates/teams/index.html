@@ -9,12 +9,14 @@
         <thead>
             <tr>
                 <th>Team Name</th>
+                <th>Stadium</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="team : ${teams}">
                 <td th:text="${team.name}">AA</td>
+                <td th:text="${team.stadium}">AA</td>
                 <td><a th:href="@{/teams/edit/{teamId}(teamId=${team.id})}">edit</a></td>
             </tr>
         </tbody>
