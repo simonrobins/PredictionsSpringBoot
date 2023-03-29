@@ -45,11 +45,17 @@ nav ul li a:hover {
 #home #homeNav,
 #users #usersNav,
 #teams #teamsNav,
-#tables #tablesNav,
+#league #leagueNav,
 #fixtures #fixturesNav,
+#missing #missingNav,
+#upcoming #upcomingNav,
 #predictions #predictionsNav
 {
     color: black;
+}
+
+#homeGoals, #awayGoals {
+    width: 3em;
 }
 
 .table-striped tr:nth-child(even) th,
@@ -57,6 +63,6 @@ nav ul li a:hover {
     background: #f8f6ff;
 }
 
-select, form, input[type=date] {
+select, form, input[type=date], input[type=text] {
     margin-bottom: 0;
 }
