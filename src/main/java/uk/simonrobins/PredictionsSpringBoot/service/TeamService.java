@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import uk.simonrobins.PredictionsSpringBoot.entity.Team;
 import uk.simonrobins.PredictionsSpringBoot.repository.TeamRepository;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class TeamService
@@ -20,7 +20,7 @@ public class TeamService
         return repository.save(team);
     }
 
-    public Team get(Long teamId)
+    public Team findById(Long teamId)
     {
         return repository.findById(teamId).get();
     }
@@ -30,7 +30,7 @@ public class TeamService
         return repository.findByName(name);
     }
 
-    public List<Team> get()
+    public Set<Team> findAll()
     {
         return repository.findAll(Sort.by("name"));
     }
