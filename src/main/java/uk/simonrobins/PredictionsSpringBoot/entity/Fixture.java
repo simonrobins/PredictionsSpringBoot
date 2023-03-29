@@ -18,8 +18,8 @@ public class Fixture
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private int matchNumber;
-	private int roundNumber;
+	private int match;
+	private int round;
 	private Date date;
 
 	@ManyToOne
@@ -29,29 +29,26 @@ public class Fixture
 
 	Integer homeGoals;
 	Integer awayGoals;
-	private Result result;
 
 	public Fixture()
 	{
 	}
 
-	public Fixture(int matchNumber, 
-		int roundNumber, 
+	public Fixture(int match, 
+		int round, 
 		Date date, 
 		Team home, 
 		Team away, 
 		Integer homeGoals, 
-		Integer awayGoals, 
-		Result result)
+		Integer awayGoals)
 	{
-		this.matchNumber = matchNumber;
-		this.roundNumber = roundNumber;
+		this.match = match;
+		this.round = round;
 		this.date = date;
 		this.home = home;
 		this.away = away;
 		this.homeGoals = homeGoals;
 		this.awayGoals = awayGoals;
-		this.result = result;
 	}
 
 	public Long getId()
@@ -64,24 +61,24 @@ public class Fixture
 		this.id = id;
 	}
 
-	public int getMatchNumber()
+	public int getMatch()
 	{
-		return matchNumber;
+		return match;
 	}
 
-	public void setMatchNumber(int matchNumber)
+	public void setMatch(int match)
 	{
-		this.matchNumber = matchNumber;
+		this.match = match;
 	}
 
-	public int getRoundNumber()
+	public int getRound()
 	{
-		return roundNumber;
+		return round;
 	}
 
-	public void setRoundNumber(int roundNumber)
+	public void setRound(int round)
 	{
-		this.roundNumber = roundNumber;
+		this.round = round;
 	}
 
 	public Date getDate()
@@ -134,19 +131,9 @@ public class Fixture
 		this.awayGoals = awayGoals;
 	}
 
-	public Result getResult()
-	{
-		return this.result;
-	}
-
-	public void setResult(Result result)
-	{
-		this.result = result;
-	}
-
 	@Override
 	public String toString()
 	{
-		return "Fixture2 [" + this.date + ", " + this.home + ", " + this.away + ", " + this.result + "]";
+		return "Fixture2 [" + this.date + ", " + this.home + ", " + this.away + "]";
 	}
 }
