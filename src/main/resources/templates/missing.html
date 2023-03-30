@@ -32,6 +32,7 @@
     <table class="table table-striped text-center">
         <thead>
             <tr>
+                <th>Round</th>
                 <th>Date</th>
                 <th>Home Team</th>
                 <th>Away Team</th>
@@ -42,6 +43,7 @@
         <tbody>
             <form method="GET" action="/api/fixture">
                 <tr th:each="fixture : ${fixtures}">
+                    <td th:text="${fixture.round}">1</td>
                     <td th:text="${#dates.format(fixture.date, 'yyyy-MM-dd')}">
                     </td>
                     <td th:text="${fixture.home.name}">Arsenal</td>
