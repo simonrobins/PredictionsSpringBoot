@@ -61,11 +61,4 @@ public class PredictionWebController {
 
         return "predictions";
     }
-
-    @GetMapping(path = "update")
-    public String update(@RequestParam Long id, @RequestParam Result result) {
-        predictionService.updateResult(id, result);
-
-        return "OK";
-    }
 }
