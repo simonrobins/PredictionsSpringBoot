@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout('predictions', ~{::section})}">
+
+<head th:replace="~{layout :: head}" />
+
+<body id="predictions">
+    <header th:replace="~{layout :: header}">This is a header</header>
+    <section>
+        <form method="GET" action="/predictions" onchange="this.submit()">
+            <table class="table text-center">
+                <tr>
+                    <td>
+                        <select name="userId">
+                            <option th:each="user : ${users}" th:value="${user.id}"
+                                th:text="${user.firstName + ' ' + user.lastName}" th:selected="${user.id == userId}">
+                                Tony Moules
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="round">
+                            <option value="">All</option>
+                            <option th:each="rnd : ${rounds}" th:value="${rnd}"
+                                th:text="${rnd}" th:selected="${rnd == round}">1</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Round</th>
+                    <th>Date</th>
+                    <th>Home</th>
+                    <th>Away</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="GET" action="/api/prediction">
+                    <tr th:each="prediction : ${predictions}">
+                        <td th:text="${prediction.fixture.round}">Arsenal</td>
+                        <td th:text="${#dates.format(prediction.fixture.date, 'dd MMM yyyy')}">26 Feb 2023</td>
+                        <td th:text="${prediction.fixture.home.name}">Arsenal</td>
+                        <td th:text="${prediction.fixture.away.name}">Chelsea</td>
+                        <td>
+                            <select name="result" th:onchange="|updatePredictionWS(this, ${prediction.id})|"
+                                th:disabled="${today.after(prediction.fixture.date)}">
+                                <option th:each="result : ${results}" th:value="${result}" th:text="${result.name}"
+                                    th:selected="${prediction.result == result}">Home</option>
+                            </select>
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>
+    </section>
+    <footer th:replace="~{layout :: footer}">This is a footer</footer>
+</body>
+
+</html>
