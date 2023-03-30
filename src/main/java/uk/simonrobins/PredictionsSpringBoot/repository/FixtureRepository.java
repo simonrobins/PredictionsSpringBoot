@@ -25,7 +25,7 @@ public interface FixtureRepository extends CrudRepository<Fixture, Long> {
 
   @Query(value = """
       select distinct f.round as round from Fixture f
-      where (f.homeGoals is null and f.awayGoals is null)
+      where (f.homeGoals is null or f.awayGoals is null)
       and f.date < ?1
       order by round desc
       """)
@@ -41,7 +41,7 @@ public interface FixtureRepository extends CrudRepository<Fixture, Long> {
 
   @Query(value = """
       select distinct f.round from Fixture f
-      where (f.homeGoals is null and f.awayGoals is null)
+      where (f.homeGoals is null or f.awayGoals is null)
       and f.date > ?1
       order by round desc
       """)
@@ -49,7 +49,7 @@ public interface FixtureRepository extends CrudRepository<Fixture, Long> {
 
   @Query(value = """
       select f from Fixture f
-      where (f.homeGoals is null and f.awayGoals is null)
+      where (f.homeGoals is null or f.awayGoals is null)
       and f.date < ?1
       order by f.date
       """)
@@ -57,7 +57,7 @@ public interface FixtureRepository extends CrudRepository<Fixture, Long> {
 
   @Query(value = """
       select f from Fixture f
-      where (f.homeGoals is null and f.awayGoals is null)
+      where (f.homeGoals is null or f.awayGoals is null)
       and (?2 is null or f.round = ?2)
       and (?3 is null or f.home.id = ?3 or f.away.id = ?3)
       and f.date < ?1
