@@ -12,14 +12,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import uk.simonrobins.PredictionsSpringBoot.controller.rest.ResultController;
+import uk.simonrobins.PredictionsSpringBoot.controller.rest.XmlHttpRequestController;
 import uk.simonrobins.PredictionsSpringBoot.service.FixtureService;
 
 @SpringBootTest
 public class TestFixtureService {
 
 	@InjectMocks
-	private ResultController controller;
+	private XmlHttpRequestController controller;
 
 	@Mock
 	FixtureService fixtureService;

@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import uk.simonrobins.PredictionsSpringBoot.controller.rest.ResultController;
+import uk.simonrobins.PredictionsSpringBoot.controller.rest.XmlHttpRequestController;
 import uk.simonrobins.PredictionsSpringBoot.entity.Result;
 import uk.simonrobins.PredictionsSpringBoot.service.PredictionService;
 
@@ -19,7 +19,7 @@ import uk.simonrobins.PredictionsSpringBoot.service.PredictionService;
 public class TestPredictionService {
 
 	@InjectMocks
-	private ResultController controller;
+	private XmlHttpRequestController controller;
 
 	@Mock
 	PredictionService predictionService;
