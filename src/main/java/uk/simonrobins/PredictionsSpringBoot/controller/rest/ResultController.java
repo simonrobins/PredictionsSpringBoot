@@ -15,29 +15,22 @@ import uk.simonrobins.PredictionsSpringBoot.service.PredictionService;
 
 @RestController
 @RequestMapping("api/")
-public class ResultController
-{
+public class ResultController {
     @Autowired
     private PredictionService predictionService;
     @Autowired
     private FixtureService fixtureService;
 
     @GetMapping("prediction/result/{id}/{result}")
-    public void prediction(@PathVariable("id") Long id, @PathVariable("result") Result result)
-    {
+    public void updatePredictionResult(@PathVariable("id") Long id, 
+            @PathVariable("result") Result result) {
         predictionService.updateResult(id, result);
-    }
-
-    @GetMapping("fixture/result/{id}/{result}")
-    public void fixture(@PathVariable("id") Long id, @PathVariable("result") Result result)
-    {
-        fixtureService.updateResult(id, result);
     }
 
     @GetMapping("fixture/date/{id}/{date}")
     public void updateFixtureDate(@PathVariable("id") Long id,
-        @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date") Date date)
-    {
+            @DateTimeFormat(pattern = "yyyy-MM-dd") 
+            @PathVariable("date") Date date) {
         fixtureService.updateDate(id, date);
     }
 }
