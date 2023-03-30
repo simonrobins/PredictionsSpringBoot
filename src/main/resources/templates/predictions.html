@@ -45,7 +45,7 @@
                         <td th:text="${prediction.fixture.home.name}">Arsenal</td>
                         <td th:text="${prediction.fixture.away.name}">Chelsea</td>
                         <td>
-                            <select name="result" th:onchange="|updatePredictionWS(this, ${prediction.id})|"
+                            <select name="result" th:onchange="|updatePrediction(${prediction.id}, this)|"
                                 th:disabled="${today.after(prediction.fixture.date)}">
                                 <option th:each="result : ${results}" th:value="${result}" th:text="${result.name}"
                                     th:selected="${prediction.result == result}">Home</option>

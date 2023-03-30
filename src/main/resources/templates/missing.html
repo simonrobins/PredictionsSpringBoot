@@ -48,12 +48,12 @@
                     <td th:text="${fixture.away.name}">Chelsea</td>
                     <td>
                         <input type="text" id="homeGoals" name="homeGoals"
-                            th:onchange="|updateHomeGoalsWS(this, ${fixture.id})|"
+                            th:onchange="|updateHomeGoals(${fixture.id}, this)|"
                             th:value="${fixture.homeGoals}?: ''" />
                     </td>
                     <td>
                         <input type="text" id="awayGoals" name="awayGoals"
-                            th:onchange="|updateAwayGoalsWS(this, ${fixture.id})|"
+                            th:onchange="|updateAwayGoals(${fixture.id}, this)|"
                             th:value="${fixture.awayGoals}?: ''" />
                     </td>
                 </tr>
