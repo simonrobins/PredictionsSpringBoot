@@ -17,9 +17,10 @@ public interface PredictionRepository extends CrudRepository<Prediction, Long>
         SELECT p
         FROM Prediction p INNER JOIN p.fixture
         WHERE (p.user.id = ?1)
-        AND   (p.fixture.round = ?2)
+        AND   (?2 is null or p.fixture.round = ?2)
         """)
     List<Prediction> findAllByUserIdAndRound(Long userId, Integer round);
+
     @Query(value="SELECT new uk.simonrobins.PredictionsSpringBoot.entity.UserAndScore(p.user, count(*) score) " +
                 "FROM Prediction p INNER JOIN p.fixture f " +
                 "WHERE (p.result = uk.simonrobins.PredictionsSpringBoot.entity.Result.HOME AND f.homeGoals > f.awayGoals) " + 
