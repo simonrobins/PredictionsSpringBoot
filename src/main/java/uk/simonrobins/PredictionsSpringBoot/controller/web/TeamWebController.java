@@ -39,22 +39,13 @@ public class TeamWebController
         return "teams/edit";
     }
 
-    @GetMapping("update/{id}")
+    @GetMapping("edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model)
     {
         Team team = teamService.findById(id);
         model.addAttribute("action", "update");
         model.addAttribute("team", team);
         return "teams/edit";
-    }
-
-    @GetMapping("delete/{id}")
-    public String delete(@PathVariable("id") Long id, Model model)
-    {
-        Team team = teamService.findById(id);
-        model.addAttribute("action", "delete");
-        model.addAttribute("team", team);
-        return "teams/delete";
     }
 
     @PostMapping(path = "update", consumes = "application/x-www-form-urlencoded")
