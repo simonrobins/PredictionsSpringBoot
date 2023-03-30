@@ -4,16 +4,14 @@ import java.util.Date;
 import java.util.Set;
 
 import org.springframework.data.repository.CrudRepository;
-
 import uk.simonrobins.PredictionsSpringBoot.entity.Fixture;
-
 import org.springframework.data.jpa.repository.Query;
 
 public interface FixtureRepository extends CrudRepository<Fixture, Long> {
 
   @Query(value = """
       select f from Fixture f
-      order by f.date desc
+      order by f.round, f.date desc
       """)
   Set<Fixture> findAll();
 
@@ -51,7 +49,7 @@ public interface FixtureRepository extends CrudRepository<Fixture, Long> {
       select f from Fixture f
       where (f.homeGoals is null or f.awayGoals is null)
       and f.date < ?1
-      order by f.date
+      order by f.round, f.date
       """)
   Set<Fixture> findPredictionRounds(Date date);
 
@@ -61,7 +59,7 @@ public interface FixtureRepository extends CrudRepository<Fixture, Long> {
       and (?2 is null or f.round = ?2)
       and (?3 is null or f.home.id = ?3 or f.away.id = ?3)
       and f.date < ?1
-      order by f.date
+      order by f.round, f.date
       """)
   Set<Fixture> findMissing(Date date, Integer round, Long teamId);
 
@@ -71,19 +69,19 @@ public interface FixtureRepository extends CrudRepository<Fixture, Long> {
       and (?2 is null or f.round = ?2)
       and (?3 is null or f.home.id = ?3 or f.away.id = ?3)
       and f.date > ?1
-      order by f.date
+      order by f.round, f.date
       """)
   Set<Fixture> findUpcoming(Date date, Integer round, Long teamId);
 
   @Query(value = """
-    select f from Fixture f
-    where (f.homeGoals is not null and f.awayGoals is not null)
-    and (?2 is null or f.round = ?2)
-    and (?3 is null or f.home.id = ?3 or f.away.id = ?3)
-    and f.date < ?1
-    order by f.date
-    """)
-Set<Fixture> findResults(Date date, Integer round, Long teamId);
+      select f from Fixture f
+      where (f.homeGoals is not null and f.awayGoals is not null)
+      and (?2 is null or f.round = ?2)
+      and (?3 is null or f.home.id = ?3 or f.away.id = ?3)
+      and f.date < ?1
+      order by f.round, f.date
+      """)
+  Set<Fixture> findResults(Date date, Integer round, Long teamId);
 
   @Query(nativeQuery = true, value = """
           select id,  sum(played) played,
