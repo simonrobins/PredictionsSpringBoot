@@ -2,11 +2,12 @@ header {
     padding: 0 !important;
 }
 
-nav {
+h1, nav {
     text-align: center;
     color: white;
     background-color: #6c7ae0;
     justify-content: center;
+    margin-bottom: 1px;
 }
 
 nav ul {
