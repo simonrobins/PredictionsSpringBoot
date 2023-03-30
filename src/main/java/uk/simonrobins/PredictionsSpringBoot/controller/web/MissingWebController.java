@@ -38,6 +38,6 @@ public class MissingWebController {
         model.addAttribute("teamId", teamId);
         model.addAttribute("fixtures", fixtures);
 
-        return "missing/index";
+        return "missing";
     }
 }

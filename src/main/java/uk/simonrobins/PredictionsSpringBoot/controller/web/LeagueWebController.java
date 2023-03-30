@@ -24,6 +24,6 @@ public class LeagueWebController
         List<TeamData> results = fixtureService.resultsTable();
         model.addAttribute("results", results);
 
-        return "league/index";
+        return "league";
     }
 }

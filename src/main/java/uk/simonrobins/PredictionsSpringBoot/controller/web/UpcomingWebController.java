@@ -37,6 +37,6 @@ public class UpcomingWebController {
         model.addAttribute("teamId", teamId);
         model.addAttribute("fixtures", fixtures);
 
-        return "upcoming/index";
+        return "upcoming";
     }
 }
