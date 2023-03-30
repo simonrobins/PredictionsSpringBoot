@@ -5,38 +5,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import uk.simonrobins.PredictionsSpringBoot.entity.Fixture;
-import uk.simonrobins.PredictionsSpringBoot.entity.Result;
+import uk.simonrobins.PredictionsSpringBoot.entity.Team;
 import uk.simonrobins.PredictionsSpringBoot.service.FixtureService;
+import uk.simonrobins.PredictionsSpringBoot.service.TeamService;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/fixtures")
-public class FixtureWebController
-{
+public class FixtureWebController {
     @Autowired
     private FixtureService fixtureService;
+    @Autowired
+    private TeamService teamService;
 
     @GetMapping
-    public String index(Model model)
-    {
-        List<Fixture> fixtures = fixtureService.findAll();
+    public String index(Model model,
+            @RequestParam(required = false) Integer round,
+            @RequestParam(required = false) Long teamId) {
+
+        Set<Fixture> fixtures = fixtureService.findResults(round, teamId);
+        Set<Integer> rounds = fixtureService.findResultsRounds();
+        Set<Team> teams = teamService.findAll();
+
+        model.addAttribute("rounds", rounds);
+        model.addAttribute("teams", teams);
+
+        model.addAttribute("round", round);
+        model.addAttribute("teamId", teamId);
         model.addAttribute("fixtures", fixtures);
 
-        Result[] results = Result.values();
-        model.addAttribute("results", results);
-
-        // Get yesterday's date
-        // The fixture result can only be changed once the fixture is in the past :)
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        Date yesterday = calendar.getTime();
-        model.addAttribute("yesterday", yesterday);
-
-        return "fixtures/index";
+        return "fixtures";
     }
 }

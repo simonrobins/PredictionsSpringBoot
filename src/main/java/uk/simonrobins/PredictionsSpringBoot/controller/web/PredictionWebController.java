@@ -10,31 +10,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uk.simonrobins.PredictionsSpringBoot.entity.Prediction;
 import uk.simonrobins.PredictionsSpringBoot.entity.User;
 import uk.simonrobins.PredictionsSpringBoot.entity.Result;
+import uk.simonrobins.PredictionsSpringBoot.service.FixtureService;
 import uk.simonrobins.PredictionsSpringBoot.service.PredictionService;
 import uk.simonrobins.PredictionsSpringBoot.service.UserService;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/predictions")
-public class PredictionWebController
-{
+public class PredictionWebController {
+    @Autowired
+    private FixtureService fixtureService;
     @Autowired
     private PredictionService predictionService;
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public String index(Model model, @RequestParam(required = false) Long userId)
-    {
+    public String index(Model model,
+            @RequestParam(required = false) Long userId,
+            @RequestParam(required = false) Integer round) {
         List<User> users = userService.findAll();
         if (null == userId)
             userId = users.get(0).getId();
 
-        List<Prediction> predictions = predictionService.getByUserId(userId);
+        List<Prediction> predictions;
+        if (round != null)
+            predictions = predictionService.getByUserIdAndRound(userId, round);
+        else
+            predictions = predictionService.getByUserId(userId);
 
+        Set<Integer> rounds = fixtureService.findAllRounds();
+
+        model.addAttribute("round", round);
+        model.addAttribute("rounds", rounds);
         model.addAttribute("userId", userId);
         model.addAttribute("users", users);
         model.addAttribute("predictions", predictions);
@@ -47,12 +59,11 @@ public class PredictionWebController
         Date today = calendar.getTime();
         model.addAttribute("today", today);
 
-        return "predictions/index";
+        return "predictions";
     }
 
     @GetMapping(path = "update")
-    public String update(@RequestParam Long id, @RequestParam Result result)
-    {
+    public String update(@RequestParam Long id, @RequestParam Result result) {
         predictionService.updateResult(id, result);
 
         return "OK";
