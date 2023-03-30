@@ -55,30 +55,23 @@ public class SetupDatabase {
 					if (line.startsWith("Match Number") == false) {
 						// Match Number,Round Number,Date,Location,Home Team,Away Team,Result
 						String[] row = line.split(",");
-						int matchNumber = Integer.parseInt(row[MatchNumberField]);
-						int roundNumber = Integer.parseInt(row[RoundNumberField]);
+						int match = Integer.parseInt(row[MatchNumberField]);
+						int round = Integer.parseInt(row[RoundNumberField]);
 						Date date = format.parse(row[DateField]);
 						String stadium = row[StadiumField];
 						Team homeTeam = readOrCreateTeam(row[HomeTeamField], stadium);
 						Team awayTeam = readOrCreateTeam(row[AwayTeamField]);
 						Integer homeGoals = null;
 						Integer awayGoals = null;
-						Result result = null;
 						// Do we have the scores at the end of the line?
 						if (row.length > ResultField) {
 							String[] goals = row[ResultField].split(" - ");
 							homeGoals = Integer.parseInt(goals[0]);
 							awayGoals = Integer.parseInt(goals[1]);
-							if (homeGoals > awayGoals)
-								result = Result.HOME;
-							else if (homeGoals < awayGoals)
-								result = Result.AWAY;
-							else
-								result = Result.DRAW;
 						}
 
-						Fixture fixture = new Fixture(matchNumber, roundNumber, date, homeTeam, awayTeam,
-								homeGoals, awayGoals, result);
+						Fixture fixture = new Fixture(match, round, date, homeTeam, awayTeam,
+								homeGoals, awayGoals);
 						fixtureService.create(fixture);
 					}
 				} catch (Exception ex) {
