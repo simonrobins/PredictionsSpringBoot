@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import uk.simonrobins.PredictionsSpringBoot.entity.TeamData;
-import uk.simonrobins.PredictionsSpringBoot.service.FixtureService;
+import uk.simonrobins.PredictionsSpringBoot.service.TeamService;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import java.util.List;
 public class LeagueWebController
 {
     @Autowired
-    private FixtureService fixtureService;
+    private TeamService teamService;
 
     @GetMapping
     public String index(Model model)
     {
-        List<TeamData> results = fixtureService.resultsTable();
+        List<TeamData> results = teamService.resultsTable();
         model.addAttribute("results", results);
 
         return "league";
