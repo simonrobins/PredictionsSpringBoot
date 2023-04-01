@@ -22,27 +22,27 @@ public class XmlHttpRequestController {
     private FixtureService fixtureService;
 
     @GetMapping("/predictions/{id}/{result}")
-    public void updatePredictionResult(@PathVariable("id") Long id, 
-            @PathVariable("result") Result result) {
+    public void updatePredictionResult(@PathVariable Long id, 
+            @PathVariable Result result) {
         predictionService.updateResult(id, result);
     }
 
     @GetMapping("/missing/home/{id}/{goals}")
-    public void updateHomeGoals(@PathVariable("id") Long id, 
-            @PathVariable("goals") Integer goals) {
+    public void updateHomeGoals(@PathVariable Long id, 
+            @PathVariable Integer goals) {
         fixtureService.updateHomeGoals(id, goals);
     }
 
     @GetMapping("/missing/away/{id}/{goals}")
-    public void updateAwayGoals(@PathVariable("id") Long id, 
-            @PathVariable("goals") Integer goals) {
+    public void updateAwayGoals(@PathVariable Long id, 
+            @PathVariable Integer goals) {
         fixtureService.updateAwayGoals(id, goals);
     }
 
     @GetMapping("/fixture/date/{id}/{date}")
-    public void updateFixtureDate(@PathVariable("id") Long id,
+    public void updateFixtureDate(@PathVariable Long id,
             @DateTimeFormat(pattern = "yyyy-MM-dd") 
-            @PathVariable("date") Date date) {
+            @PathVariable Date date) {
         fixtureService.updateDate(id, date);
     }
 }
