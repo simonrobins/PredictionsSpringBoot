@@ -10,6 +10,8 @@ It is self-contained so you should be able to
 download, unpack and import the project into Visual Studio,
 and then run './gradlew bootRun'.
 
+Fixtures & Results are downloaded from here: https://fixturedownload.com/download/csv/epl-2022
+
 - Home
     - Displays the current user predictions scores
 - Users
