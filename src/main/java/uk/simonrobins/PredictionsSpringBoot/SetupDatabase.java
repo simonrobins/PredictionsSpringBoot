@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import uk.simonrobins.PredictionsSpringBoot.entity.Fixture;
+import uk.simonrobins.PredictionsSpringBoot.entity.Fixture2;
 import uk.simonrobins.PredictionsSpringBoot.entity.Prediction;
 import uk.simonrobins.PredictionsSpringBoot.entity.Result;
 import uk.simonrobins.PredictionsSpringBoot.entity.Team;
@@ -21,15 +26,6 @@ import uk.simonrobins.PredictionsSpringBoot.service.UserService;
 
 @Component
 public class SetupDatabase {
-
-	static final int MatchNumberField = 0,
-			RoundNumberField = 1,
-			DateField = 2,
-			StadiumField = 3,
-			HomeTeamField = 4,
-			AwayTeamField = 5,
-			ResultField = 6;
-
 	static final int InitialsField = 0,
 			FirstNameField = 1,
 			LastNameField = 2,
@@ -45,39 +41,18 @@ public class SetupDatabase {
 	@Autowired
 	private UserService userService;
 
-	public void setupTeamsAndFixtures(String filename) {
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+	public void setupTeamsAndFixtures(String url) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssX");
 
-		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-			br.lines().forEach(line -> {
-				try {
-					// Let's skip the header line if it exists
-					if (line.startsWith("Match Number") == false) {
-						// Match Number,Round Number,Date,Location,Home Team,Away Team,Result
-						String[] row = line.split(",");
-						int match = Integer.parseInt(row[MatchNumberField]);
-						int round = Integer.parseInt(row[RoundNumberField]);
-						Date date = format.parse(row[DateField]);
-						String stadium = row[StadiumField];
-						Team homeTeam = readOrCreateTeam(row[HomeTeamField], stadium);
-						Team awayTeam = readOrCreateTeam(row[AwayTeamField]);
-						Integer homeGoals = null;
-						Integer awayGoals = null;
-						// Do we have the scores at the end of the line?
-						if (row.length > ResultField) {
-							String[] goals = row[ResultField].split(" - ");
-							homeGoals = Integer.parseInt(goals[0]);
-							awayGoals = Integer.parseInt(goals[1]);
-						}
-
-						Fixture fixture = new Fixture(match, round, date, homeTeam, awayTeam,
-								homeGoals, awayGoals);
-						fixtureService.create(fixture);
-					}
-				} catch (Exception ex) {
-					System.out.println(ex);
-				}
-			});
+		try {
+			for (Fixture2 f : fetchFixtures(url)) {
+				Team homeTeam = readOrCreateTeam(f.HomeTeam, f.Location);
+				Team awayTeam = readOrCreateTeam(f.AwayTeam);
+				Date date = format.parse(f.DateUtc);
+				Fixture fixture = new Fixture(f.MatchNumber, f.RoundNumber, date, homeTeam, awayTeam, f.HomeTeamScore,
+						f.AwayTeamScore);
+				fixtureService.create(fixture);
+			}
 		} catch (Exception ex) {
 			System.out.println(ex);
 		}
@@ -119,10 +94,21 @@ public class SetupDatabase {
 					result = results[resultValue];
 
 				Prediction prediction = new Prediction(user, fixture, result);
-
 				predictionService.create(prediction);
 			}
 		}
+	}
+
+	private List<Fixture2> fetchFixtures(String url) {
+		WebClient client = WebClient.create();
+
+		return client
+				.get()
+				.uri(url)
+				.accept(MediaType.APPLICATION_JSON)
+				.retrieve()
+				.bodyToMono(new ParameterizedTypeReference<List<Fixture2>>() {})
+				.block();
 	}
 
 	private Team readOrCreateTeam(String teamname) {

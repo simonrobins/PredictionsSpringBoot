@@ -22,7 +22,7 @@ public class PredictionsSpringBootApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		setupDatabase.setupTeamsAndFixtures("epl-2022-UTC.csv");
+		setupDatabase.setupTeamsAndFixtures("https://fixturedownload.com/feed/json/epl-2022");
 		setupDatabase.setupUsers("users.csv");
 		setupDatabase.setupPredictions();
 	}
