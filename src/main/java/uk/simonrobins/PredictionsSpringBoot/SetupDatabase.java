@@ -49,8 +49,17 @@ public class SetupDatabase {
 				Team homeTeam = readOrCreateTeam(f.HomeTeam, f.Location);
 				Team awayTeam = readOrCreateTeam(f.AwayTeam);
 				Date date = format.parse(f.DateUtc);
-				Fixture fixture = new Fixture(f.MatchNumber, f.RoundNumber, date, homeTeam, awayTeam, f.HomeTeamScore,
-						f.AwayTeamScore);
+				Fixture fixture = fixtureService.findFixtureBetween(homeTeam, awayTeam);
+				if(fixture == null)
+				{
+					fixture = new Fixture(f.MatchNumber, f.RoundNumber, date, homeTeam, awayTeam, f.HomeTeamScore, f.AwayTeamScore);
+				}
+				else
+				{
+					fixture.setHomeGoals(f.HomeTeamScore);
+					fixture.setAwayGoals(f.AwayTeamScore);
+				}
+
 				fixtureService.create(fixture);
 			}
 		} catch (Exception ex) {
