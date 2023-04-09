@@ -40,7 +40,7 @@ public class TeamWebController
     }
 
     @GetMapping("edit/{id}")
-    public String edit(@PathVariable("id") Long id, Model model)
+    public String edit(@PathVariable Long id, Model model)
     {
         Team team = teamService.findById(id);
         model.addAttribute("action", "update");

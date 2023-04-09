@@ -17,22 +17,20 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/users")
-public class UserWebController
-{
+public class UserWebController {
     @Autowired
     private UserService userService;
 
     @GetMapping
-    public String index(Model model)
-    {
+    public String index(Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "users/index";
     }
 
+    // Need to add predictions for all fixtures for this new user
     @GetMapping("create")
-    public String create(Model model)
-    {
+    public String create(Model model) {
         User user = new User();
         model.addAttribute("action", "create");
         model.addAttribute("user", user);
@@ -40,17 +38,17 @@ public class UserWebController
     }
 
     @GetMapping("edit/{id}")
-    public String edit(@PathVariable("id") Long id, Model model)
-    {
+    public String edit(@PathVariable Long id, Model model) {
         User user = userService.get(id);
         model.addAttribute("action", "edit");
         model.addAttribute("user", user);
         return "users/edit";
     }
 
+    // Need to delete all predictions for this deleted user
+    // CASCADE should do it automatically
     @GetMapping("delete/{id}")
-    public String delete(@PathVariable("id") Long id, Model model)
-    {
+    public String delete(@PathVariable Long id, Model model) {
         User user = userService.get(id);
         model.addAttribute("action", "delete");
         model.addAttribute("user", user);
@@ -58,19 +56,18 @@ public class UserWebController
     }
 
     @PostMapping(path = "update", consumes = "application/x-www-form-urlencoded")
-    public RedirectView update(User user, @RequestParam("action") String action)
-    {
-        switch (action)
-        {
-        case "create":
-            userService.create(user);
-            break;
-        case "edit":
-            userService.update(user);
-            break;
-        case "delete":
-            userService.delete(user.getId());
-            break;
+    public RedirectView update(User user, @RequestParam("action") String action) {
+        switch (action) {
+            case "create":
+                user.setPassword("");
+                userService.create(user);
+                break;
+            case "edit":
+                userService.update(user);
+                break;
+            case "delete":
+                userService.delete(user.getId());
+                break;
         }
 
         return new RedirectView("/users");
